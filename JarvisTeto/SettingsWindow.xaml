@@ -1,0 +1,91 @@
+<Window x:Class="JarvisTeto.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Configuración - Jarvis" Height="620" Width="440"
+        Background="{StaticResource BgVoid}"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Configuración de Jarvis" FontSize="20" FontWeight="Bold"
+                   Foreground="{StaticResource AccentBlueBright}" Margin="0,0,0,16"/>
+
+        <TextBlock Grid.Row="1" Text="API Key de Google (Gemini):" Foreground="{StaticResource TextPrimary}" Margin="0,0,0,6"/>
+        <PasswordBox Grid.Row="2" x:Name="ApiKeyBox" Padding="8" FontSize="13"
+                     Background="{StaticResource BgPanel}" Foreground="{StaticResource TextPrimary}"
+                     BorderBrush="{StaticResource AccentBlue}" BorderThickness="1" Margin="0,0,0,4"/>
+        <TextBlock Grid.Row="3" Text="Conseguila gratis en aistudio.google.com/apikey"
+                   Foreground="{StaticResource TextMuted}" FontSize="11" Margin="0,0,0,16"/>
+
+        <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="0,0,0,16">
+            <TextBlock Text="Modelo:" Foreground="{StaticResource TextPrimary}" VerticalAlignment="Center" Margin="0,0,8,0"/>
+            <ComboBox x:Name="ModelCombo" Width="240" SelectedIndex="0">
+                <ComboBoxItem Content="gemini-3.6-flash (rápido, recomendado)"/>
+                <ComboBoxItem Content="gemini-2.5-pro (más preciso)"/>
+            </ComboBox>
+        </StackPanel>
+
+        <Rectangle Grid.Row="5" Height="1" Fill="{StaticResource AccentBlue}" Opacity="0.3" Margin="0,0,0,16"/>
+
+        <TextBlock Grid.Row="6" Text="Voz de Jarvis" FontSize="15" FontWeight="Bold"
+                   Foreground="{StaticResource AccentBlueBright}" Margin="0,0,0,10"/>
+
+        <CheckBox Grid.Row="7" x:Name="AutoSpeakCheck" Content="Leer las respuestas en voz alta automáticamente"
+                   Foreground="{StaticResource TextPrimary}" Margin="0,0,0,12"/>
+
+        <StackPanel Grid.Row="8" Orientation="Horizontal" Margin="0,0,0,12">
+            <TextBlock Text="Voz:" Foreground="{StaticResource TextPrimary}" VerticalAlignment="Center" Margin="0,0,8,0"/>
+            <ComboBox x:Name="VoiceCombo" Width="280"/>
+        </StackPanel>
+        <TextBlock Grid.Row="9" Text="Para más opciones, instalá voces en inglés (idealmente británica) desde Configuración de Windows → Hora e idioma → Voz."
+                   Foreground="{StaticResource TextMuted}" FontSize="11" TextWrapping="Wrap" Margin="0,0,0,16"/>
+
+        <StackPanel Grid.Row="10" Margin="0,0,0,8">
+            <TextBlock Foreground="{StaticResource TextPrimary}">
+                <Run Text="Tono (más grave = más robótico): "/>
+                <Run x:Name="PitchValueText" Text="-4"/>
+            </TextBlock>
+            <Slider x:Name="PitchSlider" Minimum="-10" Maximum="10" Value="-4" TickFrequency="1"
+                    IsSnapToTickEnabled="True" ValueChanged="PitchSlider_ValueChanged"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="11" Margin="0,0,0,16">
+            <TextBlock Foreground="{StaticResource TextPrimary}">
+                <Run Text="Velocidad de habla: "/>
+                <Run x:Name="RateValueText" Text="-1"/>
+            </TextBlock>
+            <Slider x:Name="RateSlider" Minimum="-10" Maximum="10" Value="-1" TickFrequency="1"
+                    IsSnapToTickEnabled="True" ValueChanged="RateSlider_ValueChanged"/>
+        </StackPanel>
+
+        <Button Grid.Row="12" Content="▶ Probar voz" Width="140" HorizontalAlignment="Left"
+                Style="{StaticResource RoundButton}" Click="PreviewVoice_Click" Margin="0,0,0,16"/>
+
+        <Rectangle Grid.Row="13" Height="1" Fill="{StaticResource AccentBlue}" Opacity="0.3" Margin="0,0,0,16"/>
+
+        <StackPanel Grid.Row="14" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Cancelar" Width="90" Margin="0,0,8,0" Click="Cancel_Click"
+                    Background="{StaticResource BgPanel}" Foreground="{StaticResource TextPrimary}" Style="{StaticResource RoundButton}"/>
+            <Button Content="Guardar" Width="90" Click="Save_Click" Style="{StaticResource RoundButton}"/>
+        </StackPanel>
+    </Grid>
+    </ScrollViewer>
+</Window>

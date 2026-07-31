@@ -1,0 +1,110 @@
+<Application x:Class="JarvisTeto.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:JarvisTeto"
+             ShutdownMode="OnExplicitShutdown">
+    <Application.Resources>
+        <ResourceDictionary>
+            <local:AlignConverter x:Key="AlignConverter"/>
+            <local:BubbleColorConverter x:Key="BubbleColorConverter"/>
+            <local:BubbleTextColorConverter x:Key="BubbleTextColorConverter"/>
+
+            <!-- Paleta "Jarvis": negro-azulado profundo + cian, sin restos del tema anterior -->
+            <SolidColorBrush x:Key="BgVoid" Color="#05080E"/>
+            <SolidColorBrush x:Key="BgPanel" Color="#0B121C"/>
+            <SolidColorBrush x:Key="BgPanelLight" Color="#121B29"/>
+            <SolidColorBrush x:Key="AccentBlue" Color="#1FA8D8"/>
+            <SolidColorBrush x:Key="AccentBlueBright" Color="#00D9FF"/>
+            <SolidColorBrush x:Key="AccentBlueDim" Color="#0E5C82"/>
+            <SolidColorBrush x:Key="AlertRed" Color="#FF4D5E"/>
+            <SolidColorBrush x:Key="TextPrimary" Color="#E7F6FF"/>
+            <SolidColorBrush x:Key="TextMuted" Color="#7C93A8"/>
+            <SolidColorBrush x:Key="BorderBlue" Color="#1B3A52"/>
+
+            <LinearGradientBrush x:Key="HeaderGradient" StartPoint="0,0" EndPoint="1,0">
+                <GradientStop Color="#0B121C" Offset="0"/>
+                <GradientStop Color="#0E1D2E" Offset="1"/>
+            </LinearGradientBrush>
+
+            <Style x:Key="RoundButton" TargetType="Button">
+                <Setter Property="Background" Value="{StaticResource AccentBlue}"/>
+                <Setter Property="Foreground" Value="#03080D"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Padding" Value="12,6"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Bd" Background="{TemplateBinding Background}" CornerRadius="8" Padding="{TemplateBinding Padding}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="{StaticResource AccentBlueBright}"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style x:Key="GhostButton" TargetType="Button" BasedOn="{StaticResource RoundButton}">
+                <Setter Property="Background" Value="{StaticResource BgPanelLight}"/>
+                <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+            </Style>
+
+            <Style x:Key="IconToggle" TargetType="ToggleButton">
+                <Setter Property="Background" Value="{StaticResource BgPanelLight}"/>
+                <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="BorderBrush" Value="{StaticResource BorderBlue}"/>
+                <Setter Property="Width" Value="38"/>
+                <Setter Property="Height" Value="38"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ToggleButton">
+                            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="19">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsChecked" Value="True">
+                        <Setter Property="Background" Value="{StaticResource AccentBlue}"/>
+                        <Setter Property="Foreground" Value="#03080D"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <!-- Scrollbar minimalista azul, para que no quede el gris feo por defecto de Windows -->
+            <Style x:Key="JarvisScrollThumb" TargetType="Thumb">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Thumb">
+                            <Border Background="{StaticResource AccentBlueDim}" CornerRadius="4" Margin="2"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="ScrollBar">
+                <Setter Property="Width" Value="8"/>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ScrollBar">
+                            <Track x:Name="PART_Track" IsDirectionReversed="True">
+                                <Track.Thumb>
+                                    <Thumb Style="{StaticResource JarvisScrollThumb}"/>
+                                </Track.Thumb>
+                            </Track>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

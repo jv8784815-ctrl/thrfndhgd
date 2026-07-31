@@ -1,0 +1,31 @@
+<UserControl x:Class="JarvisTeto.Controls.OrbVisualizer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             SnapsToDevicePixels="True" ClipToBounds="False">
+    <Grid x:Name="RootGrid" Background="Transparent" SizeChanged="RootGrid_SizeChanged">
+
+        <!-- Halo grande de fondo: da el "glow" ambiental azul detrás de toda la esfera -->
+        <Ellipse x:Name="AmbientGlow" Fill="#1400D9FF" IsHitTestVisible="False">
+            <Ellipse.Effect>
+                <BlurEffect x:Name="AmbientBlur" Radius="60"/>
+            </Ellipse.Effect>
+        </Ellipse>
+
+        <!-- Núcleo central: reacciona como "singularidad" al pensar, y respira suave en reposo -->
+        <Ellipse x:Name="Core" IsHitTestVisible="False">
+            <Ellipse.Fill>
+                <RadialGradientBrush x:Name="CoreBrush">
+                    <GradientStop x:Name="CoreCenterStop" Color="#FFEFFFFF" Offset="0"/>
+                    <GradientStop x:Name="CoreMidStop" Color="#FF00D9FF" Offset="0.45"/>
+                    <GradientStop x:Name="CoreEdgeStop" Color="#0000D9FF" Offset="1"/>
+                </RadialGradientBrush>
+            </Ellipse.Fill>
+            <Ellipse.Effect>
+                <DropShadowEffect x:Name="CoreGlow" Color="#FF00D9FF" BlurRadius="45" ShadowDepth="0" Opacity="0.85"/>
+            </Ellipse.Effect>
+        </Ellipse>
+
+        <!-- Los orbes individuales se agregan/animan por código para poder tener 100+ sin costo de XAML -->
+        <Canvas x:Name="OrbCanvas" Background="Transparent"/>
+    </Grid>
+</UserControl>
